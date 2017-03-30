@@ -12,6 +12,8 @@
 		B4E209E08F672042375CB4C4 /* Pods_AudioCloudTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628DED53A3B28E2E144B26F5 /* Pods_AudioCloudTests.framework */; };
 		BB56FF071E80D60E00A10F75 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB56FF061E80D60E00A10F75 /* Audio.swift */; };
 		BB6D61511E8A0A98000D47DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6D61501E8A0A98000D47DE /* GoogleService-Info.plist */; };
+		BBB2BDCD1E8C8033008B132F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB2BDCC1E8C8033008B132F /* TestViewController.swift */; };
+		BBB2BDCF1E8CA94D008B132F /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB2BDCE1E8CA94D008B132F /* Song.swift */; };
 		BBBFC0451E7B72F50012F9D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBFC0441E7B72F50012F9D2 /* AppDelegate.swift */; };
 		BBBFC0471E7B72F50012F9D2 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBFC0461E7B72F50012F9D2 /* FirstViewController.swift */; };
 		BBBFC0491E7B72F50012F9D2 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBFC0481E7B72F50012F9D2 /* SecondViewController.swift */; };
@@ -56,6 +58,8 @@
 		B147AA7F4FB020419BA81CFF /* Pods-AudioCloudTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioCloudTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AudioCloudTests/Pods-AudioCloudTests.release.xcconfig"; sourceTree = "<group>"; };
 		BB56FF061E80D60E00A10F75 /* Audio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		BB6D61501E8A0A98000D47DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BBB2BDCC1E8C8033008B132F /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		BBB2BDCE1E8CA94D008B132F /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		BBBFC0411E7B72F50012F9D2 /* AudioCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBBFC0441E7B72F50012F9D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBBFC0461E7B72F50012F9D2 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				BBBFC0441E7B72F50012F9D2 /* AppDelegate.swift */,
+				BBB2BDCC1E8C8033008B132F /* TestViewController.swift */,
 				BBBFC0461E7B72F50012F9D2 /* FirstViewController.swift */,
 				BBBFC0481E7B72F50012F9D2 /* SecondViewController.swift */,
 				BBBFC04A1E7B72F50012F9D2 /* Main.storyboard */,
@@ -162,6 +167,7 @@
 				BBBFC0741E7B74DC0012F9D2 /* StreamViewController.swift */,
 				BBBFC0761E7B750B0012F9D2 /* StreamCell.swift */,
 				BB56FF061E80D60E00A10F75 /* Audio.swift */,
+				BBB2BDCE1E8CA94D008B132F /* Song.swift */,
 				BBBFC04D1E7B72F50012F9D2 /* Assets.xcassets */,
 				BBBFC04F1E7B72F50012F9D2 /* LaunchScreen.storyboard */,
 				BB6D61501E8A0A98000D47DE /* GoogleService-Info.plist */,
@@ -483,11 +489,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBB2BDCF1E8CA94D008B132F /* Song.swift in Sources */,
 				BB56FF071E80D60E00A10F75 /* Audio.swift in Sources */,
 				BBBFC0751E7B74DC0012F9D2 /* StreamViewController.swift in Sources */,
 				BBBFC07B1E7B87750012F9D2 /* SearchViewController.swift in Sources */,
 				BBBFC0831E7B94210012F9D2 /* MusicCollectionViewController.swift in Sources */,
 				BBBFC0791E7B87670012F9D2 /* SearchCell.swift in Sources */,
+				BBB2BDCD1E8C8033008B132F /* TestViewController.swift in Sources */,
 				BBBFC07D1E7B927C0012F9D2 /* LibraryMenuViewController.swift in Sources */,
 				BBBFC0811E7B94070012F9D2 /* MusicCollectionCell.swift in Sources */,
 				BBBFC0491E7B72F50012F9D2 /* SecondViewController.swift in Sources */,

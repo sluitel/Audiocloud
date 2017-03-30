@@ -9,13 +9,18 @@
 import UIKit
 import Parse
 import SDWebImage
+import Firebase
 
 class StreamViewController: UITableViewController, StreamCellDelegate {
     
-    var audioObjects = [Audio]()
+    var audioObjects = [Song]()
+    var ref: FIRDatabaseReference!
+    var songsRef: FIRDatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = FIRDatabase.database().reference()
+        songsRef = ref.child("songs")
         loadData()
         let username = "subash"
         let password = "pass"
@@ -37,79 +42,94 @@ class StreamViewController: UITableViewController, StreamCellDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StreamCell", for: indexPath) as! StreamCell
-        let audio = audioObjects[indexPath.row]
         
         cell.likeButton.isHidden = true
-        audio.fetchLikersData { (likes, isLiked, error) in
-            if error == nil {
-                cell.likeButton.isHidden = false
-                cell.likeButton.isSelected = isLiked
-            }
-        }
+        let song = audioObjects[indexPath.row]
+        cell.coverArtImageView.sd_setImage(with: song.coverArtURL)
+        cell.captionLabel.text = song.songTitle
+//        audio.fetchLikersData { (likes, isLiked, error) in
+//            if error == nil {
+//                cell.likeButton.isHidden = false
+//                cell.likeButton.isSelected = isLiked
+//            }
+//        }
         
         
-        let object = audio.object
+//        let object = audio.object
         
-        cell.object = object
-        cell.delegate = self
-        if let user = object.object(forKey: "user") as? PFUser {
-            cell.usernameLabel.text = user.username
-            if let profilePictureURLString = (user.object(forKey: "profilePicture") as? PFFile)?.url  {
-                if let profilePicURL = URL(string: profilePictureURLString) {
-                    cell.profilePictureView.sd_setImage(with: profilePicURL)
-                }
-            }
-        }
-        cell.captionLabel.text = object.object(forKey: "description") as? String
-        if let length = object.object(forKey: "length") as? NSNumber {
-            cell.musicLengthLabel.text = length.stringValue
-        }
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, yyyy"
-        if let postedDate = object.createdAt {
-            cell.timeLabel.text = formatter.string(from: postedDate)
-        }
-        
-        if let coverArtPath = (object.object(forKey: "cover") as? PFFile)?.url {
-            if let coverArtURL = URL(string: coverArtPath) {
-                cell.coverArtImageView.sd_setImage(with: coverArtURL)
-            }
-        }
-        cell.fetchLikeData()
-
+//        cell.object = object
+//        cell.delegate = self
+//        if let user = object.object(forKey: "user") as? PFUser {
+//            cell.usernameLabel.text = user.username
+//            if let profilePictureURLString = (user.object(forKey: "profilePicture") as? PFFile)?.url  {
+//                if let profilePicURL = URL(string: profilePictureURLString) {
+//                    cell.profilePictureView.sd_setImage(with: profilePicURL)
+//                }
+//            }
+//        }
+//        cell.captionLabel.text = object.object(forKey: "description") as? String
+//        if let length = object.object(forKey: "length") as? NSNumber {
+//            cell.musicLengthLabel.text = length.stringValue
+//        }
+//        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MMM dd, yyyy"
+//        if let postedDate = object.createdAt {
+//            cell.timeLabel.text = formatter.string(from: postedDate)
+//        }
+//        
+//        if let coverArtPath = (object.object(forKey: "cover") as? PFFile)?.url {
+//            if let coverArtURL = URL(string: coverArtPath) {
+//                cell.coverArtImageView.sd_setImage(with: coverArtURL)
+//            }
+//        }
+//        cell.fetchLikeData()
+    
         return cell
     }
     
     
     // MARK: - Table View Delegate
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let object = audioObjects[indexPath.row].object
-        if let nowPlayingVC = storyboard?.instantiateViewController(withIdentifier: "NowPlayingVC") as? NowPlayingViewController {
-            nowPlayingVC.object = object
-            present(nowPlayingVC, animated: true, completion: nil)
-        }
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let object = audioObjects[indexPath.row].object
+//        if let nowPlayingVC = storyboard?.instantiateViewController(withIdentifier: "NowPlayingVC") as? NowPlayingViewController {
+//            nowPlayingVC.object = object
+//            present(nowPlayingVC, animated: true, completion: nil)
+//        }
+//    }
     
     
     
     func loadData() {
-        let query = PFQuery(className: "Audio")
-        query.includeKey("user")
-        query.findObjectsInBackground { (objects, error) in
-            if let theObjects = objects {
-                self.audioObjects.removeAll()
-                for object in theObjects {
-                    self.audioObjects.append(Audio(object: object))
-                }
-                self.tableView.reloadData()
-            }
-            else if let theError = error {
-                print("what the hell : \(theError)")
-            }
-            self.refreshControl?.endRefreshing()
-        }
+//        let query = PFQuery(className: "Audio")
+//        query.includeKey("user")
+//        query.findObjectsInBackground { (objects, error) in
+//            if let theObjects = objects {
+//                self.audioObjects.removeAll()
+//                for object in theObjects {
+//                    self.audioObjects.append(Audio(object: object))
+//                }
+//                self.tableView.reloadData()
+//            }
+//            else if let theError = error {
+//                print("what the hell : \(theError)")
+//            }
+//            self.refreshControl?.endRefreshing()
+//        }
+        
+        songsRef.observe(.childAdded, with: { (snapshot) in
+            let song = Song(data: snapshot.value as? [String : Any])
+            self.audioObjects.append(song)
+            self.tableView.reloadData()
+            
+        })
+        
+//        songsRef.queryOrderedByPriority().observe(FIRDataEventType.childAdded, andPreviousSiblingKeyWith: { (snapshot) in
+//            print(snapshot)
+//            snapshot.0.
+//        })
+        
     }
     
     
